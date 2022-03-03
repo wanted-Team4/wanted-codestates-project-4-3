@@ -25,7 +25,7 @@ const MainContainer = styled.main`
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 25px;
+  /* padding: 25px; */
 `;
 
 export default Home;

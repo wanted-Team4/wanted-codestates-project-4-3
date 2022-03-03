@@ -115,9 +115,9 @@ const Label = styled.label`
   display: block;
   height: 22px;
   width: 44px
-  &.sc-gjNHFA gerxap input:checked + label {
+  /* &.sc-gjNHFA gerxap input:checked + label {
     background-color: bisque;
-  }
+  } */
 `;
 const LabelIn = styled.div`
   background-color: #fff;

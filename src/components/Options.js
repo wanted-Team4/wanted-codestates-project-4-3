@@ -22,7 +22,7 @@ const Options = ({ dataOne, setDataOne }) => {
               setList={setLeftData}
             />
           </OptionsUl>
-          <OptionsCount>0/{dataOneNum}</OptionsCount>
+          <OptionsCount>0 / {dataOneNum}</OptionsCount>
         </OptionsContainer>
       </OptionsBox>
 
@@ -35,7 +35,7 @@ const Options = ({ dataOne, setDataOne }) => {
               list={rightData}
               setList={setRightData}
             /></OptionsUl>
-          <OptionsCount>0/{dataTwoNum}</OptionsCount>
+          <OptionsCount>0 / {dataTwoNum}</OptionsCount>
         </OptionsContainer>
       </OptionsBox>
     </>
@@ -43,8 +43,8 @@ const Options = ({ dataOne, setDataOne }) => {
 };
 const OptionsBox = styled.div`
   // 옵션 박스 감싸는 div
-  width: 200px;
-  height: 300px;
+  width: 250px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   margin: 30px;
@@ -62,8 +62,12 @@ const OptionsContainer = styled.div`
 `;
 const OptionsSpan = styled.span`
   font-weight: 700;
-  margin-left: 10px;
-  margin-top: 10px;
+  height: 60px;
+  width: 100%;
+  padding-top: 15px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
 `;
 const OptionsUl = styled.ul`
   display: flex;
@@ -71,9 +75,9 @@ const OptionsUl = styled.ul`
   overflow: auto;
   width: 100%;
   list-style: none;
-  border-bottom: 1px solid #ccc;
   padding: 0;
   height: 100%;
+  margin: 0;
 `;
 const OptionsCount = styled.div`
   background-color: #fff;
@@ -83,5 +87,8 @@ const OptionsCount = styled.div`
   position: relative;
   text-align: center;
   width: 100%;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: 500;
 `;
 export default Options;
