@@ -31,7 +31,7 @@ const OptionsArrow = styled.div`
   flex-direction: column;
   margin: 60px 10px 0;
   position: absolute;
-  top: 50px;
+  top: 95px;
 `;
 const ArrowBtn = styled.button`
   cursor: pointer;

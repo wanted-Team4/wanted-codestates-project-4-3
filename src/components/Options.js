@@ -1,46 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Search from "./Search"
 import styled from "styled-components";
+import Items from "./Items";
 
-const Options = ({dataOne, setDataOne}) => {
+const Options = ({ dataOne, setDataOne }) => {
   let dataOneNum = dataOne[1].length;
   let dataTwoNum = dataOne[2].length;
-
-  const OptionsOneMap = dataOne[1].map((item, i) => {
-    return (
-      <Optionsli key={i}>
-        {item.emoji}
-        {item.name}
-      </Optionsli>
-    );
-  });
-  const OptionsTwoMap = dataOne[2].map((item, i) => {
-    return (
-      <Optionsli key={i}>
-        {item.emoji}
-        {item.name}
-      </Optionsli>
-    );
-  });
+  const [leftData, setLeftData] = useState(dataOne[1]);
+  const [rightData, setRightData] = useState(dataOne[2]);
 
   return (
     <>
       <OptionsBox>
-        <Search data={dataOne} setData={setDataOne}/>
+        <Search data={dataOne} setData={setDataOne} />
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
-          <OptionsUl>{OptionsOneMap}</OptionsUl>
-          <OptionsCount>0/{dataOneNum}</OptionsCount>
+          <OptionsUl>
+            <Items
+              list={leftData}
+              setList={setLeftData}
+            />
+          </OptionsUl>
+          <OptionsCount>0 / {dataOneNum}</OptionsCount>
         </OptionsContainer>
       </OptionsBox>
 
       <OptionsBox>
-        <Search data={dataOne} setData={setDataOne}/>
+        <Search data={dataOne} setData={setDataOne} />
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
-          <OptionsUl>{OptionsTwoMap}</OptionsUl>
-          <OptionsCount>0/{dataTwoNum}</OptionsCount>
+          <OptionsUl>
+            <Items
+              list={rightData}
+              setList={setRightData}
+            /></OptionsUl>
+          <OptionsCount>0 / {dataTwoNum}</OptionsCount>
         </OptionsContainer>
       </OptionsBox>
     </>
@@ -48,8 +43,8 @@ const Options = ({dataOne, setDataOne}) => {
 };
 const OptionsBox = styled.div`
   // 옵션 박스 감싸는 div
-  width: 200px;
-  height: 300px;
+  width: 250px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   margin: 30px;
@@ -67,8 +62,12 @@ const OptionsContainer = styled.div`
 `;
 const OptionsSpan = styled.span`
   font-weight: 700;
-  margin-left: 10px;
-  margin-top: 10px;
+  height: 60px;
+  width: 100%;
+  padding-top: 15px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
 `;
 const OptionsUl = styled.ul`
   display: flex;
@@ -76,16 +75,9 @@ const OptionsUl = styled.ul`
   overflow: auto;
   width: 100%;
   list-style: none;
-  border-bottom: 1px solid #ccc;
   padding: 0;
   height: 100%;
-`;
-const Optionsli = styled.li`
-  cursor: pointer;
-  font-size: 14px;
-  list-style: none;
-  border-top: 1px solid #ccc;
-  padding: 5px;
+  margin: 0;
 `;
 const OptionsCount = styled.div`
   background-color: #fff;
@@ -95,5 +87,8 @@ const OptionsCount = styled.div`
   position: relative;
   text-align: center;
   width: 100%;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: 500;
 `;
 export default Options;
