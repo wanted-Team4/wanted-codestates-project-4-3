@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import Search from "./Search"
+import Search from "./Search";
 import styled from "styled-components";
 import Items from "./Items";
 
@@ -17,10 +17,7 @@ const Options = ({ dataOne, setDataOne }) => {
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>
-            <Items
-              list={leftData}
-              setList={setLeftData}
-            />
+            <Items list={leftData} setList={setLeftData} />
           </OptionsUl>
           <OptionsCount>0 / {dataOneNum}</OptionsCount>
         </OptionsContainer>
@@ -31,10 +28,8 @@ const Options = ({ dataOne, setDataOne }) => {
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>
-            <Items
-              list={rightData}
-              setList={setRightData}
-            /></OptionsUl>
+            <Items list={rightData} setList={setRightData} />
+          </OptionsUl>
           <OptionsCount>0 / {dataTwoNum}</OptionsCount>
         </OptionsContainer>
       </OptionsBox>

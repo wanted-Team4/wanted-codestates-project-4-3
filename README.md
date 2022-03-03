@@ -1,5 +1,34 @@
 # 🚗 wanted-codestates-project-4-3
 
+로그프레소 기업 과제
+
+###
+
+## 🚗 Implement
+
+### Stack
+
+`Javascript` `React` `Styled-Components`
+
+## 🚗 Directory
+
+```
+├── public/
+├── src/
+│   ├── components/              - page components
+│   ├── hooks/                   - custom hook(useDragAndDrop)
+│   ├── pages/                   - rendering pages
+│
+├── App.js                       - page rendering
+├── index.js                     - entry point
+├── README.md                    - 리드미(프리뷰, 배포링크, 코드컨벤션)
+└── package.json                 - 사용 package 목록
+```
+
+### <br/>
+
+###
+
 ## 🚗 Code Convention
 
 ### Getting Started
