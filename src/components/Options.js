@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { emojiMenus } from "./emojiMenus";
 
-const Options = () => {
-  const [dataOne, setDataOne] = useState({
-    1: [...emojiMenus.slice(0, 7)],
-    2: [...emojiMenus.slice(7, emojiMenus.length)],
-  });
+import Search from "./Search"
+import styled from "styled-components";
+
+const Options = ({dataOne, setDataOne}) => {
   let dataOneNum = dataOne[1].length;
   let dataTwoNum = dataOne[2].length;
 
@@ -30,7 +27,7 @@ const Options = () => {
   return (
     <>
       <OptionsBox>
-        <OptionsInp placeholder="검색"></OptionsInp>
+        <Search data={dataOne} setData={setDataOne}/>
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>{OptionsOneMap}</OptionsUl>
@@ -39,7 +36,7 @@ const Options = () => {
       </OptionsBox>
 
       <OptionsBox>
-        <OptionsInp placeholder="검색"></OptionsInp>
+        <Search data={dataOne} setData={setDataOne}/>
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>{OptionsTwoMap}</OptionsUl>
@@ -56,16 +53,6 @@ const OptionsBox = styled.div`
   display: flex;
   flex-direction: column;
   margin: 30px;
-`;
-const OptionsInp = styled.input`
-  //옵션 박스 인풋창
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
-  line-height: 26px;
-  margin-bottom: 20px;
-  padding: 2px 10px;
-  width: 100%;
 `;
 const OptionsContainer = styled.div`
   align-items: start;
