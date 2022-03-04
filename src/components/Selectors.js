@@ -30,7 +30,7 @@ const Selectors = ({
     }
     // Right -> Left
     else {
-      setLeftData((prev) => {
+      setRightData((prev) => {
         let copyData = Object.assign([], prev);
 
         selectId.map((id) =>
