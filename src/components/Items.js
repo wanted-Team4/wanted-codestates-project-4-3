@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useDragAndDrop } from "../hooks/useDragAndDrop";
 import { useRecoilState } from "recoil";
-import { fontSizeAtom, leftTitleAtom } from "../atom";
+import { fontSizeAtom, leftTitleAtom, singleMovingAtom } from "../atom";
 
 const Optionsli = styled.li`
   cursor: pointer;
@@ -41,23 +41,23 @@ const Items = ({
 
   const [fontSize] = useRecoilState(fontSizeAtom);
   const [firstClick, setFirstClick] = useState(0);
+  const [selectedNum] = useRecoilState(singleMovingAtom);
 
   const selectItem = (e, id, idx) => {
     setDirection(direction);
-
-    if (e.shiftKey) {
+    if (selectedNum && e.shiftKey) {
       let copyData = Object.assign([], list);
       let select = [];
       const start = firstClick < idx ? firstClick : idx;
-      const end = firstClick < idx ? idx + 1 : firstClick + 1;
+      const end = firstClick < idx ? idx : firstClick;
 
-      copyData.splice(start, end).map((item) => select.push(item.id));
+      copyData.slice(start, end + 1).map((item) => select.push(item.id));
 
       setSelectId(select);
       return;
     }
 
-    if (e.ctrlKey) {
+    if (selectedNum && e.ctrlKey) {
       setFirstClick(idx);
       setSelectId((prev) => [...prev, id]);
       return;
