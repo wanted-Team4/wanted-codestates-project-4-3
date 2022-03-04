@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-
-import Search from "./Search";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { searchStateAtom } from "../atom";
 
 const Options = () => {
+  const [onDisabled] = useRecoilState(searchStateAtom);
+
   return (
     <>
-      <OptionsInp placeholder="검색"></OptionsInp>
+      {onDisabled ? (
+        <OptionsInp placeholder="검색" disabled></OptionsInp>
+      ) : (
+        <OptionsInp placeholder="검색"></OptionsInp>
+      )}
     </>
   );
 };

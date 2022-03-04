@@ -1,20 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 
 export const useDragAndDrop = ({ list, setList }) => {
-    const [isDragging, setisDragging] = useState(false);
+    const startContainer = useRef();
     const draggingItem = useRef();
     const dragOverItem = useRef();
 
     const handleDragStart = (e, idx) => {
         draggingItem.current = idx;
-        setisDragging(true);
+        startContainer.current = true;
         if ((e.dataTransfer.effectedAllowed = "move")) {
             e.target.style.backgroundColor = "#FFEDED";
         }
     };
 
     const onDragEnter = (e, idx) => {
-        if (!setisDragging) {
+        if (!startContainer.current) {
             return;
         }
         updateItems(e, idx);
@@ -36,7 +36,7 @@ export const useDragAndDrop = ({ list, setList }) => {
     };
 
     useEffect(() => {
-        setisDragging(false);
+        startContainer.current = false;
     }, []);
 
     return {
