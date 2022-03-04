@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import styled from "styled-components";
 
 const Selectors = ({
@@ -9,6 +10,23 @@ const Selectors = ({
   selectId,
   setSelectId,
 }) => {
+
+  const [initLeftData, setInitLeftData] = useState(leftData)
+  const [initRightData, setInitRightData] = useState(rightData)
+
+  const onClickClear = ()=>{
+    setLeftData(initLeftData)
+    setRightData(initRightData)
+  }
+  const onClickRight=()=>{
+    setLeftData([])
+    setRightData([...rightData,...leftData])
+  }
+  const onClickLeft=()=>{
+    setRightData([])
+    setLeftData([...leftData,...rightData])
+  }
+
   const onMove = (selectId, direction) => {
     let moveItem = [];
     // Left -> Right
@@ -52,21 +70,21 @@ const Selectors = ({
   return (
     <>
       <OptionsArrow>
-        <ArrowBtn>
+        <Button onClick={onClickClear}>
           <i className="fa-solid fa-rotate"></i>
-        </ArrowBtn>
-        <ArrowBtn>
+        </Button >
+        <Button onClick={onClickRight}>
           <i className="fa-solid fa-angles-right"></i>
-        </ArrowBtn>
-        <ArrowBtn>
+        </Button>
+        <Button onClick={onClickLeft}>
           <i className="fa-solid fa-angles-left"></i>
-        </ArrowBtn>
-        <ArrowBtn onClick={() => onMove(selectId, 1)}>
+        </Button>
+        <Button onClick={() => onMove(selectId, 1)}>
           <i className="fa-solid fa-angle-right"></i>
-        </ArrowBtn>
-        <ArrowBtn onClick={() => onMove(selectId, 0)}>
+        </Button>
+        <Button onClick={() => onMove(selectId, 0)}>
           <i className="fa-solid fa-angle-left"></i>
-        </ArrowBtn>
+        </Button>
       </OptionsArrow>
     </>
   );
@@ -80,7 +98,7 @@ const OptionsArrow = styled.div`
   position: absolute;
   top: 95px;
 `;
-const ArrowBtn = styled.button`
+const Button = styled.button`
   cursor: pointer;
   height: 30px;
   width: 30px;

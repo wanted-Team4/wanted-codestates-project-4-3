@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
 import Options from "../components/Options";
-import Settings from "../components/Settings";
+import React from "react";
 import Selectors from "../components/Selectors";
-import { useState } from "react";
+import Settings from "../components/Settings";
 import { emojiMenus } from "../components/emojiMenus";
+import styled from "styled-components";
+import { useState } from "react";
 
 const Home = () => {
   const [leftData, setLeftData] = useState(emojiMenus);
@@ -39,7 +39,6 @@ const MainContainer = styled.main`
   position: relative;
   display: flex;
   justify-content: center;
-  /* padding: 25px; */
 `;
 
 export default Home;
