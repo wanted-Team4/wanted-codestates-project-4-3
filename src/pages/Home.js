@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     console.log(leftData);
-  }, []);
+  });
   return (
     <MainContainer>
       <Options
