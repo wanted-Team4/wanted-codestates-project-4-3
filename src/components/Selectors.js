@@ -28,39 +28,61 @@ const Selectors = ({
 
   const onMove = (selectId, direction) => {
     let moveItem = [];
+    if (!selectId) return;
     // Left -> Right
     if (direction) {
       setLeftData((prev) => {
         let copyData = Object.assign([], prev);
 
         selectId.map((id) =>
-          leftData.map((data, index) => {
+          leftData.map((data) => {
             if (id === data.id) {
-              copyData.splice(index, 1);
-              moveItem = [data];
+              copyData.splice(
+                copyData.findIndex((item) => item.id === id),
+                1
+              );
+
+              if (selectId.length === 1) {
+                moveItem = [{ ...data }];
+              } else {
+                moveItem = [...moveItem, { ...data }];
+              }
             }
           })
         );
         return copyData;
       });
-      setRightData((prev) => [...prev, ...moveItem]);
+
+      setRightData((prev) => {
+        return [...prev, ...moveItem];
+      });
     }
     //Right -> Left
     else {
       setRightData((prev) => {
         let copyData = Object.assign([], prev);
-
         selectId.map((id) =>
           rightData.map((data, index) => {
             if (id === data.id) {
-              copyData.splice(index, 1);
-              moveItem = [data];
+              copyData.splice(
+                copyData.findIndex((item) => item.id === id),
+                1
+              );
+
+              if (selectId.length === 1) {
+                moveItem = [{ ...data }];
+              } else {
+                moveItem = [...moveItem, { ...data }];
+              }
             }
           })
         );
         return copyData;
       });
-      setLeftData((prev) => [...prev, ...moveItem]);
+
+      setLeftData((prev) => {
+        return [...prev, ...moveItem];
+      });
     }
 
     setSelectId([]);
