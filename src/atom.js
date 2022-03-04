@@ -31,8 +31,8 @@ export const boxHeightAtom = atom({
   default: 300,
 });
 
-export const onceMovingAtom = atom({
-  key: "onceMovingAtom",
+export const singleMovingAtom = atom({
+  key: "singleMovingAtom",
   default: null,
 });
 

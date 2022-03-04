@@ -9,7 +9,6 @@ import {
   boxWidthAtom,
   boxHeightAtom,
   selectedNumAtom,
-  selectedNum,
 } from "../atom";
 
 const Options = ({

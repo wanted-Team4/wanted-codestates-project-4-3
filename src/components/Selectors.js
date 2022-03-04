@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-
 import styled from "styled-components";
+import { singleMovingAtom } from "../atom";
+import { useRecoilState } from "recoil";
 
 const Selectors = ({
   leftData,
@@ -10,22 +11,23 @@ const Selectors = ({
   selectId,
   setSelectId,
 }) => {
+  const [singleMoving] = useRecoilState(singleMovingAtom);
 
-  const [initLeftData, setInitLeftData] = useState(leftData)
-  const [initRightData, setInitRightData] = useState(rightData)
+  const [initLeftData, setInitLeftData] = useState(leftData);
+  const [initRightData, setInitRightData] = useState(rightData);
 
-  const onClickClear = ()=>{
-    setLeftData(initLeftData)
-    setRightData(initRightData)
-  }
-  const onClickRight=()=>{
-    setLeftData([])
-    setRightData([...rightData,...leftData])
-  }
-  const onClickLeft=()=>{
-    setRightData([])
-    setLeftData([...leftData,...rightData])
-  }
+  const onClickClear = () => {
+    setLeftData(initLeftData);
+    setRightData(initRightData);
+  };
+  const onClickRight = () => {
+    setLeftData([]);
+    setRightData([...rightData, ...leftData]);
+  };
+  const onClickLeft = () => {
+    setRightData([]);
+    setLeftData([...leftData, ...rightData]);
+  };
 
   const onMove = (selectId, direction) => {
     let moveItem = [];
@@ -72,13 +74,27 @@ const Selectors = ({
       <OptionsArrow>
         <Button onClick={onClickClear}>
           <i className="fa-solid fa-rotate"></i>
-        </Button >
-        <Button onClick={onClickRight}>
-          <i className="fa-solid fa-angles-right"></i>
         </Button>
-        <Button onClick={onClickLeft}>
-          <i className="fa-solid fa-angles-left"></i>
-        </Button>
+        {singleMoving ? (
+          <>
+            <Button onClick={onClickRight}>
+              <i className="fa-solid fa-angles-right"></i>
+            </Button>
+            <Button onClick={onClickLeft}>
+              <i className="fa-solid fa-angles-left"></i>
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button onClick={onClickRight} disabled>
+              <i className="fa-solid fa-angles-right"></i>
+            </Button>
+            <Button onClick={onClickLeft} disabled>
+              <i className="fa-solid fa-angles-left"></i>
+            </Button>
+          </>
+        )}
+
         <Button onClick={() => onMove(selectId, 1)}>
           <i className="fa-solid fa-angle-right"></i>
         </Button>

@@ -8,7 +8,7 @@ import {
   fontSizeAtom,
   boxWidthAtom,
   boxHeightAtom,
-  onceMovingAtom,
+  singleMovingAtom,
   selectedNumAtom,
 } from "../atom";
 const Setting = () => {
@@ -25,8 +25,8 @@ const Setting = () => {
   const [searchColor, setSearchColor] = useState(false);
 
   //하나씩만옮기기
-  const [onceMoving, setOnceMoving] = useRecoilState(onceMovingAtom);
-  const [onceMovingColor, setOnceMovingColor] = useState(false);
+  const [singleMoving, setSingleMoving] = useRecoilState(singleMovingAtom);
+  const [singleMovingColor, setSingleMovingColor] = useState(false);
 
   //선택된 아이템 갯수 표시
   const [selectedNum, setSelectedNum] = useRecoilState(selectedNumAtom);
@@ -105,10 +105,11 @@ const Setting = () => {
             <Contents>
               <span>하나씩만 옮기기</span>
               <button
-              // onClick={() =>
-              //   setOnceMovingColor(!onceMovingColor) & setOnceMoving()
-              // }
-              // className={onceMovingColor ? "off" : "on"}
+                onClick={() =>
+                  setSingleMovingColor(!singleMovingColor) &
+                  setSingleMoving(!singleMoving)
+                }
+                className={singleMovingColor ? "off" : "on"}
               ></button>
             </Contents>
 
