@@ -120,7 +120,7 @@ const Setting = () => {
                   setSelectedNumColor(!selectedNumColor) &
                   setSelectedNum(!selectedNum)
                 }
-                className={selectedNumColor ? "on" : "off"}
+                className={selectedNumColor ? "off" : "on"}
               ></button>
             </Contents>
 

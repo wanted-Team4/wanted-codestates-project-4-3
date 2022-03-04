@@ -47,11 +47,11 @@ const Options = ({
             />
           </OptionsUl>
 
-          {selectedNum ? (
+          {selectedNum ? null : (
             <OptionsCount>
               {direction === "left" ? selectId.length : 0} / {dataOneNum}
             </OptionsCount>
-          ) : null}
+          )}
         </OptionsContainer>
       </OptionsBox>
 
@@ -70,11 +70,11 @@ const Options = ({
             />
           </OptionsUl>
 
-          {selectedNum ? (
+          {selectedNum ? null : (
             <OptionsCount>
               {direction === "right" ? selectId.length : 0} / {dataTwoNum}
             </OptionsCount>
-          ) : null}
+          )}
         </OptionsContainer>
       </OptionsBox>
     </>
