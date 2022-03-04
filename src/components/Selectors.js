@@ -31,58 +31,37 @@ const Selectors = ({
     if (!selectId) return;
     // Left -> Right
     if (direction) {
-      setLeftData((prev) => {
-        let copyData = Object.assign([], prev);
-
-        selectId.map((id) =>
-          leftData.map((data) => {
-            if (id === data.id) {
-              copyData.splice(
-                copyData.findIndex((item) => item.id === id),
-                1
-              );
-
-              if (selectId.length === 1) {
-                moveItem = [{ ...data }];
-              } else {
-                moveItem = [...moveItem, { ...data }];
-              }
-            }
-          })
-        );
-        return copyData;
-      });
-
-      setRightData((prev) => {
-        return [...prev, ...moveItem];
-      });
+      let copyData = Object.assign([], leftData);
+      selectId.map((id) =>
+        leftData.map((data) => {
+          if (id === data.id) {
+            copyData.splice(
+              copyData.findIndex((item) => item.id === id),
+              1
+            );
+            moveItem = [...moveItem, { ...data }];
+          }
+        })
+      );
+      setLeftData(copyData);
+      setRightData((prev) => [...prev, ...moveItem]);
     }
     //Right -> Left
     else {
-      setRightData((prev) => {
-        let copyData = Object.assign([], prev);
-        selectId.map((id) =>
-          rightData.map((data, index) => {
-            if (id === data.id) {
-              copyData.splice(
-                copyData.findIndex((item) => item.id === id),
-                1
-              );
-
-              if (selectId.length === 1) {
-                moveItem = [{ ...data }];
-              } else {
-                moveItem = [...moveItem, { ...data }];
-              }
-            }
-          })
-        );
-        return copyData;
-      });
-
-      setLeftData((prev) => {
-        return [...prev, ...moveItem];
-      });
+      let copyData = Object.assign([], rightData);
+      selectId.map((id) =>
+        rightData.map((data) => {
+          if (id === data.id) {
+            copyData.splice(
+              copyData.findIndex((item) => item.id === id),
+              1
+            );
+            moveItem = [...moveItem, { ...data }];
+          }
+        })
+      );
+      setRightData(copyData);
+      setLeftData((prev) => [...prev, ...moveItem]);
     }
 
     setSelectId([]);
