@@ -1,8 +1,9 @@
+import React, { useEffect } from "react";
+
 import Options from "../components/Options";
+import Selectors from "../components/Selectors";
 // import Settings from "../components/Settings";
 import Setting from "../components/Setting";
-import React, { useEffect } from "react";
-import Selectors from "../components/Selectors";
 import { emojiMenus } from "../components/emojiMenus";
 import styled from "styled-components";
 import { useState } from "react";
@@ -15,6 +16,7 @@ const Home = () => {
   useEffect(() => {
     console.log(leftData);
   });
+
   return (
     <MainContainer>
       <Options
