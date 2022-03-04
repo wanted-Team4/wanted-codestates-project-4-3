@@ -235,10 +235,10 @@ const Contents = styled.div`
     font-size: 14px;
   }
   .on {
-    background: rgba(0, 128, 0, 0.5);
+    background: rgba(0, 128, 0, 0.65);
   }
   .off {
-    background: rgba(255, 0, 0, 0.8);
+    background: rgba(255, 0, 0, 0.65);
   }
 `;
 

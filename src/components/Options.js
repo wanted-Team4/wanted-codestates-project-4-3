@@ -46,13 +46,12 @@ const Options = ({
               setDirection={setDirection}
             />
           </OptionsUl>
-          <OptionsCount>
-            {selectedNum ? (
-              <>
-                {direction === "left" ? selectId.length : 0} / {dataOneNum}
-              </>
-            ) : null}
-          </OptionsCount>
+
+          {selectedNum ? (
+            <OptionsCount>
+              {direction === "left" ? selectId.length : 0} / {dataOneNum}
+            </OptionsCount>
+          ) : null}
         </OptionsContainer>
       </OptionsBox>
 
@@ -70,13 +69,12 @@ const Options = ({
               setDirection={setDirection}
             />
           </OptionsUl>
-          <OptionsCount>
-            {selectedNum ? (
-              <>
-                {direction === "right" ? selectId.length : 0} / {dataTwoNum}
-              </>
-            ) : null}
-          </OptionsCount>
+
+          {selectedNum ? (
+            <OptionsCount>
+              {direction === "right" ? selectId.length : 0} / {dataTwoNum}
+            </OptionsCount>
+          ) : null}
         </OptionsContainer>
       </OptionsBox>
     </>
@@ -86,6 +84,8 @@ const OptionsBox = styled.div`
   // 옵션 박스 감싸는 div
   width: ${(props) => props.boxWidth}px;
   height: ${(props) => props.boxHeight}px;
+  max-height: 400px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   margin: 30px;
