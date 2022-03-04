@@ -112,7 +112,6 @@ const OptionsUl = styled.ul`
   overflow: auto;
   width: 100%;
   list-style: none;
-  border-bottom: 1px solid #ccc;
   padding: 0;
   height: 100%;
 `;
