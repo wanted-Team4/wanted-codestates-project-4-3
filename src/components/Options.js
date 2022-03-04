@@ -11,7 +11,10 @@ import {
   boxHeightAtom,
 } from "../atom";
 
-const Options = ({ dataOne, setDataOne }) => {
+const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
+  let dataOneNum = leftData.length;
+  let dataTwoNum = rightData.length;
+
   //세팅 상태입니다
   const [rightTitle] = useRecoilState(rightTitleAtom);
   const [leftTitle] = useRecoilState(leftTitleAtom);
@@ -19,15 +22,10 @@ const Options = ({ dataOne, setDataOne }) => {
   const [boxWidth] = useRecoilState(boxWidthAtom);
   const [boxHeight] = useRecoilState(boxHeightAtom);
 
-  let dataOneNum = dataOne[1].length;
-  let dataTwoNum = dataOne[2].length;
-  const [leftData, setLeftData] = useState(dataOne[1]);
-  const [rightData, setRightData] = useState(dataOne[2]);
-
   return (
     <>
       <OptionsBox boxWidth={boxWidth} boxHeight={boxHeight}>
-        <Search data={dataOne} setData={setDataOne} />
+        <Search leftData={leftData} setLeftData={setLeftData} />
         <OptionsContainer>
           <OptionsSpan>{leftTitle}</OptionsSpan>
           <OptionsUl>
@@ -38,7 +36,7 @@ const Options = ({ dataOne, setDataOne }) => {
       </OptionsBox>
 
       <OptionsBox boxWidth={boxWidth} boxHeight={boxHeight}>
-        <Search data={dataOne} setData={setDataOne} />
+        <Search rightData={rightData} setRightData={setRightData} />
         <OptionsContainer>
           <OptionsSpan>{rightTitle}</OptionsSpan>
           <OptionsUl>

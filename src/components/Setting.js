@@ -16,12 +16,14 @@ const Setting = () => {
   const [onSetting, setOnSetting] = useState(false);
 
   //타이틀
-  const [onTittle, setOnTittle] = useState(false);
   const [rightTitle, setRightTitle] = useRecoilState(rightTitleAtom);
   const [leftTitle, setLeftTitle] = useRecoilState(leftTitleAtom);
-  //검색: disabled속성 가져오기
+  const [onTittle, setOnTittle] = useState(false);
+
+  //검색
   const [onSearch, setOnSearch] = useRecoilState(searchStateAtom);
   const [searchColor, setSearchColor] = useState(false);
+
   //하나씩만옮기기
   const [onceMoving, setOnceMoving] = useRecoilState(onceMovingAtom);
   const [onceMovingColor, setOnceMovingColor] = useState(false);
