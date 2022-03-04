@@ -10,9 +10,17 @@ import {
   boxHeightAtom,
 } from "../atom";
 
-const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
+const Options = ({
+  leftData,
+  setLeftData,
+  rightData,
+  setRightData,
+  selectId,
+  setSelectId,
+}) => {
   let dataOneNum = leftData.length;
   let dataTwoNum = rightData.length;
+  const [direction, setDirection] = useState();
 
   //세팅 상태입니다
   const [rightTitle] = useRecoilState(rightTitleAtom);
@@ -27,9 +35,18 @@ const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
         <OptionsContainer>
           <OptionsSpan>{leftTitle}</OptionsSpan>
           <OptionsUl>
-            <Items list={leftData} setList={setLeftData} />
+            <Items
+              list={leftData}
+              setList={setLeftData}
+              selectId={selectId}
+              setSelectId={setSelectId}
+              direction="left"
+              setDirection={setDirection}
+            />
           </OptionsUl>
-          <OptionsCount>0 / {dataOneNum}</OptionsCount>
+          <OptionsCount>
+            {direction === "left" ? selectId.length : 0} / {dataOneNum}
+          </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
 
@@ -38,9 +55,18 @@ const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
         <OptionsContainer>
           <OptionsSpan>{rightTitle}</OptionsSpan>
           <OptionsUl>
-            <Items list={rightData} setList={setRightData} />
+            <Items
+              list={rightData}
+              setList={setRightData}
+              selectId={selectId}
+              setSelectId={setSelectId}
+              direction="right"
+              setDirection={setDirection}
+            />
           </OptionsUl>
-          <OptionsCount>0 / {dataTwoNum}</OptionsCount>
+          <OptionsCount>
+            {direction === "right" ? selectId.length : 0} / {dataTwoNum}
+          </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
     </>

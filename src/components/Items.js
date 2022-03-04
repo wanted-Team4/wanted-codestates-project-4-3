@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useDragAndDrop } from "../hooks/useDragAndDrop";
 import { useRecoilState } from "recoil";
@@ -22,14 +23,34 @@ const Text = styled.p`
   font-size: ${(props) => props.fontSize}px;
 `;
 
-const Items = ({ list, setList }) => {
+const Items = ({
+  list,
+  setList,
+  selectId,
+  setSelectId,
+  direction,
+  setDirection,
+}) => {
   const { handleDragStart, onDragEnter } = useDragAndDrop({
     list,
     setList,
   });
 
   const [fontSize] = useRecoilState(fontSizeAtom);
-  console.log(">>", fontSize);
+  const selectItem = (id) => {
+    setDirection(direction);
+    // 선택된게 하나도 없으면 추가
+    if (selectId.length === 0) {
+      setSelectId([id]);
+      return;
+    }
+
+    if (selectId.findIndex((item) => item === id)) {
+      setSelectId([id]);
+    } else {
+      setSelectId([]);
+    }
+  };
 
   return (
     <>
@@ -40,6 +61,13 @@ const Items = ({ list, setList }) => {
           onDragStart={(e) => {
             handleDragStart(e, idx);
           }}
+          style={{
+            backgroundColor:
+              selectId.findIndex((id) => id === item.id) === -1
+                ? "white"
+                : "#b5d8f0",
+          }}
+          onClick={() => selectItem(item.id)}
           onDragOver={(e) => e.preventDefault()}
           onDragEnter={(e) => onDragEnter(e, idx)}
         >
