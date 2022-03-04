@@ -45,14 +45,13 @@ const Items = ({
 
   const selectItem = (e, id, idx) => {
     setDirection(direction);
-
     if (selectedNum && e.shiftKey) {
       let copyData = Object.assign([], list);
       let select = [];
       const start = firstClick < idx ? firstClick : idx;
-      const end = firstClick < idx ? idx + 1 : firstClick + 1;
+      const end = firstClick < idx ? idx : firstClick;
 
-      copyData.splice(start, end).map((item) => select.push(item.id));
+      copyData.slice(start, end + 1).map((item) => select.push(item.id));
 
       setSelectId(select);
       return;
