@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import Search from "./Search";
-import styled from "styled-components";
-import Items from "./Items";
-import { useRecoilState } from "recoil";
+import React, { useState } from "react";
 import {
-  rightTitleAtom,
-  leftTitleAtom,
-  boxWidthAtom,
   boxHeightAtom,
+  boxWidthAtom,
+  leftTitleAtom,
+  rightTitleAtom,
   selectedNumAtom,
 } from "../atom";
+
+import Items from "./Items";
+import Search from "./Search";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 const Options = ({
   leftData,
@@ -33,7 +34,7 @@ const Options = ({
   return (
     <>
       <OptionsBox boxWidth={boxWidth} boxHeight={boxHeight}>
-        <Search leftData={leftData} setLeftData={setLeftData} />
+        <Search leftData={leftData} setLeftData={setLeftData} index="left" />
         <OptionsContainer>
           <OptionsSpan>{leftTitle}</OptionsSpan>
           <OptionsUl>
