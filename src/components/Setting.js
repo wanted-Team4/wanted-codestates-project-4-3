@@ -57,16 +57,13 @@ const Setting = () => {
 
   return (
     <Container>
-      {/* i 버튼이 너무 작아서 토글시 오류가 나서, 임의로 버튼으로 대체해놨습니다! 추후 수정부탁드려요! */}
-      <button
-        // className="fa-solid fa-gear"
-        onClick={() => setOnSetting(!onSetting)}
-      >
-        설정
+      <button className="settingBtn" onClick={() => setOnSetting(!onSetting)}>
+        <i className="fa-solid fa-gear"></i>
       </button>
+
       {onSetting ? (
-        <List className={onSetting}>
-          <li>
+        <SettingBox>
+          <List>
             <Contents>
               <span>타이틀</span>
               <button
@@ -79,19 +76,22 @@ const Setting = () => {
                 <div className="showInputs">
                   <input
                     type="text"
-                    onChange={(e) => setRightTitle(e.target.value)}
-                    value={rightTitle}
+                    onChange={(e) => setLeftTitle(e.target.value)}
+                    value={leftTitle}
+                    className="title"
+                    placeholder="왼쪽 타이틀을 입력하세요"
                   />
                   <input
                     type="text"
-                    onChange={(e) => setLeftTitle(e.target.value)}
-                    value={leftTitle}
+                    onChange={(e) => setRightTitle(e.target.value)}
+                    value={rightTitle}
+                    className="title"
+                    placeholder="오른쪽 타이틀을 입력하세요"
                   />
                 </div>
               ) : null}
             </Inputs>
-          </li>
-          <li>
+
             <Contents>
               <span>검색</span>
               <button
@@ -101,8 +101,7 @@ const Setting = () => {
                 className={searchColor ? "off" : "on"}
               ></button>
             </Contents>
-          </li>
-          <li>
+
             <Contents>
               <span>하나씩만 옮기기</span>
               <button
@@ -112,46 +111,42 @@ const Setting = () => {
                 className={onceMovingColor ? "off" : "on"}
               ></button>
             </Contents>
-          </li>
-          <Contents>
-            <span>선택된 아이템 갯수 표시</span>
-            <button
-              onClick={() => setSelectedNumColor(!selectedNumColor)}
-              className={selectedNumColor ? "off" : "on"}
-            ></button>
-          </Contents>
-          <li>
+
             <Contents>
-              <span>아이템 크기</span>
+              <span>아이템 갯수 표시</span>
+              <button
+                onClick={() => setSelectedNumColor(!selectedNumColor)}
+                className={selectedNumColor ? "off" : "on"}
+              ></button>
+            </Contents>
+
+            <Contents>
+              <span>아이템크기</span>
               <div>
                 <label for="xs">XS</label>
                 <input
                   type="radio"
                   id="xs"
                   name="size"
-                  onClick={() => setFontSize(14)}
+                  onClick={() => setFontSize(12)}
                 />
                 <label for="s">S</label>
                 <input
                   type="radio"
                   id="s"
                   name="size"
-                  onClick={() => setFontSize(16)}
+                  onClick={() => setFontSize(14)}
                 />
                 <label for="m">M</label>
                 <input
                   type="radio"
                   id="m"
                   name="size"
-                  onClick={() => setFontSize(18)}
+                  onClick={() => setFontSize(16)}
                 />
               </div>
             </Contents>
-          </li>
-          <li>
-            <Contents>
-              <span>박스 사이즈 조정</span>
-            </Contents>
+
             <Inputs>
               <div>
                 {/* <div onClick={onLeaveFocusBoxWidthInput}> */}
@@ -170,8 +165,8 @@ const Setting = () => {
                 <span>px</span>
               </div>
             </Inputs>
-          </li>
-        </List>
+          </List>
+        </SettingBox>
       ) : null}
     </Container>
   );
@@ -183,16 +178,32 @@ const Container = styled.div`
   position: absolute;
   right: 5vw;
   top: 1vw;
-  border: 1px solid black;
-  width: 200px;
+
+  .settingBtn {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 170px;
+
+    .fa-gear {
+      font-size: 14px;
+      color: #777;
+      padding: 3px;
+    }
+  }
+`;
+
+const SettingBox = styled.div`
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
 `;
 const List = styled.ul`
   width: 100%;
   margin: 0;
   padding: 0;
-  li {
-    list-style: none;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 
 const Contents = styled.div`
@@ -202,31 +213,61 @@ const Contents = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  border-top: 1px solid #ccc;
+  padding: 12px 15px;
   box-sizing: border-box;
-  border-top: 1px solid #999;
 
   span {
+    font-size: 14px;
   }
 
   button {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     border: none;
   }
+  label {
+    font-size: 14px;
+  }
   .on {
-    background: green;
+    background: rgba(0, 128, 0, 0.5);
   }
   .off {
-    background: red;
-  }
-  .showInputs {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: rgba(255, 0, 0, 0.8);
   }
 `;
 
 const Inputs = styled.div`
-  background: #eee;
+  transition: top 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ccc;
+
+  label {
+    font-size: 14px;
+  }
+  span {
+    font-size: 14px;
+  }
+  input {
+    padding: 3px 5px;
+    margin: 5px 10px;
+    width: 100px;
+    font-size: 14px;
+
+    &.title {
+      width: 150px;
+    }
+  }
+  .showInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px;
+    box-sizing: border-box;
+  }
 `;

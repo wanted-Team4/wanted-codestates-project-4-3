@@ -6,7 +6,6 @@ import { useRecoilState } from "recoil";
 import {
   rightTitleAtom,
   leftTitleAtom,
-  fontSizeAtom,
   boxWidthAtom,
   boxHeightAtom,
 } from "../atom";
@@ -18,7 +17,6 @@ const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
   //세팅 상태입니다
   const [rightTitle] = useRecoilState(rightTitleAtom);
   const [leftTitle] = useRecoilState(leftTitleAtom);
-  const [fontSize] = useRecoilState(fontSizeAtom);
   const [boxWidth] = useRecoilState(boxWidthAtom);
   const [boxHeight] = useRecoilState(boxHeightAtom);
 
@@ -29,7 +27,7 @@ const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
         <OptionsContainer>
           <OptionsSpan>{leftTitle}</OptionsSpan>
           <OptionsUl>
-            <Items list={leftData} setList={setLeftData} fontSize={fontSize} />
+            <Items list={leftData} setList={setLeftData} />
           </OptionsUl>
           <OptionsCount>0 / {dataOneNum}</OptionsCount>
         </OptionsContainer>
@@ -40,11 +38,7 @@ const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
         <OptionsContainer>
           <OptionsSpan>{rightTitle}</OptionsSpan>
           <OptionsUl>
-            <Items
-              list={rightData}
-              setList={setRightData}
-              fontSize={fontSize}
-            />
+            <Items list={rightData} setList={setRightData} />
           </OptionsUl>
           <OptionsCount>0 / {dataTwoNum}</OptionsCount>
         </OptionsContainer>
@@ -88,7 +82,7 @@ const OptionsUl = styled.ul`
 `;
 const Optionsli = styled.li`
   cursor: pointer;
-  font-size: ${(props) => props.fontSize}px;
+  font-size: 12px;
   list-style: none;
   border-top: 1px solid #ccc;
   padding: 5px;
