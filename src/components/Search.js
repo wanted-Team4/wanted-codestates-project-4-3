@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
-import Search from "./Search"
+import Search from "./Search";
 import styled from "styled-components";
 
 const Options = () => {
-
   return (
     <>
-        <OptionsInp placeholder="검색"></OptionsInp>
+      <OptionsInp placeholder="검색"></OptionsInp>
     </>
   );
 };
@@ -22,6 +21,5 @@ const OptionsInp = styled.input`
   padding: 2px 10px;
   width: 100%;
 `;
-
 
 export default Options;

@@ -1,42 +1,42 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 export const useDragAndDrop = ({ list, setList }) => {
-    const startContainer = useRef();
+    const [isDragging, setisDragging] = useState(false);
     const draggingItem = useRef();
     const dragOverItem = useRef();
 
-    const handleDragStart = (e, position) => {
-        draggingItem.current = position;
-        startContainer.current = true;
-        if (e.dataTransfer.effectedAllowed = 'move') {
-            e.target.style.backgroundColor = '#FFEDED';
+    const handleDragStart = (e, idx) => {
+        draggingItem.current = idx;
+        setisDragging(true);
+        if ((e.dataTransfer.effectedAllowed = "move")) {
+            e.target.style.backgroundColor = "#FFEDED";
         }
     };
 
-    const onDragEnter = (e, position) => {
-        if (!startContainer.current) {
+    const onDragEnter = (e, idx) => {
+        if (!setisDragging) {
             return;
         }
-        handleDragEnter(e, position);
+        updateItems(e, idx);
     };
 
-    const handleDragEnter = (e, position) => {
-        dragOverItem.current = position;
-        const listCopy = [...list];
-        const draggingItemContent = listCopy[dragOverItem.current];
-        listCopy.splice(dragOverItem.current, 1);
-        listCopy.splice(draggingItem.current, 0, draggingItemContent);
+    const updateItems = (e, idx) => {
+        dragOverItem.current = idx;
+        const tempState = [...list];
+        const movingItem = tempState[dragOverItem.current];
+        tempState.splice(dragOverItem.current, 1);
+        tempState.splice(draggingItem.current, 0, movingItem);
         draggingItem.current = dragOverItem.current;
-        dragOverItem.current = null;
-        setList(listCopy);
+        dragOverItem.current = "";
+        setList(tempState);
 
-        if (e.dataTransfer.effectedAllowed = 'move') {
-            e.target.style.backgroundColor = 'white';
+        if ((e.dataTransfer.effectedAllowed = "move")) {
+            e.target.style.backgroundColor = "white";
         }
     };
 
     useEffect(() => {
-        startContainer.current = false;
+        setisDragging(false);
     }, []);
 
     return {
