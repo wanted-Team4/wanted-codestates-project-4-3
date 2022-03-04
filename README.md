@@ -8,7 +8,7 @@
 
 ### Stack
 
-`Javascript` `React` `Styled-Components`
+`Javascript` `React` `Styled-Components` `recoil`
 
 ## 🚗 Directory
 
