@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useDragAndDrop } from "../hooks/useDragAndDrop";
 
@@ -18,31 +18,31 @@ const Emoji = styled.div`
 `;
 const Text = styled.p``;
 
-const Items = ({ list, setList, selectId, setSelectId }) => {
+const Items = ({
+  list,
+  setList,
+  selectId,
+  setSelectId,
+  direction,
+  setDirection,
+}) => {
   const { handleDragStart, onDragEnter } = useDragAndDrop({
     list,
     setList,
   });
-  const itemRefs = useRef([]);
-  const selectItem = (e, id) => {
+
+  const selectItem = (id) => {
+    setDirection(direction);
     // 선택된게 하나도 없으면 추가
     if (selectId.length === 0) {
       setSelectId([id]);
-      itemRefs.current[id].style.backgroundColor = "#b5d8f0";
       return;
-    } else {
-      if (selectId.findIndex((item) => item === id)) return;
-      // 있는 아이디면 삭제
-      setSelectId((prev) => {
-        const copy = prev.slice();
-        copy.splice(
-          selectId.findIndex((item) => item === id),
-          1
-        );
+    }
 
-        itemRefs.current[id].style.backgroundColor = "";
-        return copy;
-      });
+    if (selectId.findIndex((item) => item === id)) {
+      setSelectId([id]);
+    } else {
+      setSelectId([]);
     }
   };
 
@@ -51,12 +51,17 @@ const Items = ({ list, setList, selectId, setSelectId }) => {
       {list.map((item, idx) => (
         <Optionsli
           key={item.id}
-          ref={(elem) => (itemRefs.current[item.id] = elem)}
           draggable
           onDragStart={(e) => {
             handleDragStart(e, idx);
           }}
-          onClick={(e) => selectItem(e, item.id)}
+          style={{
+            backgroundColor:
+              selectId.findIndex((id) => id === item.id) === -1
+                ? "white"
+                : "#b5d8f0",
+          }}
+          onClick={() => selectItem(item.id)}
           onDragOver={(e) => e.preventDefault()}
           onDragEnter={(e) => onDragEnter(e, idx)}
         >
