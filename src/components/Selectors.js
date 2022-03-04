@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -10,22 +10,21 @@ const Selectors = ({
   selectId,
   setSelectId,
 }) => {
+  const [initLeftData, setInitLeftData] = useState(leftData);
+  const [initRightData, setInitRightData] = useState(rightData);
 
-  const [initLeftData, setInitLeftData] = useState(leftData)
-  const [initRightData, setInitRightData] = useState(rightData)
-
-  const onClickClear = ()=>{
-    setLeftData(initLeftData)
-    setRightData(initRightData)
-  }
-  const onClickRight=()=>{
-    setLeftData([])
-    setRightData([...rightData,...leftData])
-  }
-  const onClickLeft=()=>{
-    setRightData([])
-    setLeftData([...leftData,...rightData])
-  }
+  const onClickClear = () => {
+    setLeftData(initLeftData);
+    setRightData(initRightData);
+  };
+  const onClickRight = () => {
+    setLeftData([]);
+    setRightData([...rightData, ...leftData]);
+  };
+  const onClickLeft = () => {
+    setRightData([]);
+    setLeftData([...leftData, ...rightData]);
+  };
 
   const onMove = (selectId, direction) => {
     let moveItem = [];
@@ -37,8 +36,8 @@ const Selectors = ({
         selectId.map((id) =>
           leftData.map((data, index) => {
             if (id === data.id) {
-              leftData.splice(index, 1);
-              moveItem = [...moveItem, data];
+              copyData.splice(index, 1);
+              moveItem = [data];
             }
           })
         );
@@ -46,7 +45,7 @@ const Selectors = ({
       });
       setRightData((prev) => [...prev, ...moveItem]);
     }
-    // Right -> Left
+    //Right -> Left
     else {
       setRightData((prev) => {
         let copyData = Object.assign([], prev);
@@ -54,8 +53,8 @@ const Selectors = ({
         selectId.map((id) =>
           rightData.map((data, index) => {
             if (id === data.id) {
-              rightData.splice(index, 1);
-              moveItem = [...moveItem, data];
+              copyData.splice(index, 1);
+              moveItem = [data];
             }
           })
         );
@@ -72,7 +71,7 @@ const Selectors = ({
       <OptionsArrow>
         <Button onClick={onClickClear}>
           <i className="fa-solid fa-rotate"></i>
-        </Button >
+        </Button>
         <Button onClick={onClickRight}>
           <i className="fa-solid fa-angles-right"></i>
         </Button>
