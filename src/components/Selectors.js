@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import styled from "styled-components";
-import { singleMovingAtom } from "../atom";
-import { useRecoilState } from "recoil";
 
 const Selectors = ({
   leftData,
@@ -11,8 +10,6 @@ const Selectors = ({
   selectId,
   setSelectId,
 }) => {
-  const [singleMoving] = useRecoilState(singleMovingAtom);
-
   const [initLeftData, setInitLeftData] = useState(leftData);
   const [initRightData, setInitRightData] = useState(rightData);
 
@@ -31,39 +28,61 @@ const Selectors = ({
 
   const onMove = (selectId, direction) => {
     let moveItem = [];
+    if (!selectId) return;
     // Left -> Right
     if (direction) {
       setLeftData((prev) => {
         let copyData = Object.assign([], prev);
 
         selectId.map((id) =>
-          leftData.map((data, index) => {
+          leftData.map((data) => {
             if (id === data.id) {
-              leftData.splice(index, 1);
-              moveItem = [...moveItem, data];
+              copyData.splice(
+                copyData.findIndex((item) => item.id === id),
+                1
+              );
+
+              if (selectId.length === 1) {
+                moveItem = [{ ...data }];
+              } else {
+                moveItem = [...moveItem, { ...data }];
+              }
             }
           })
         );
         return copyData;
       });
-      setRightData((prev) => [...prev, ...moveItem]);
+
+      setRightData((prev) => {
+        return [...prev, ...moveItem];
+      });
     }
-    // Right -> Left
+    //Right -> Left
     else {
       setRightData((prev) => {
         let copyData = Object.assign([], prev);
-
         selectId.map((id) =>
           rightData.map((data, index) => {
             if (id === data.id) {
-              rightData.splice(index, 1);
-              moveItem = [...moveItem, data];
+              copyData.splice(
+                copyData.findIndex((item) => item.id === id),
+                1
+              );
+
+              if (selectId.length === 1) {
+                moveItem = [{ ...data }];
+              } else {
+                moveItem = [...moveItem, { ...data }];
+              }
             }
           })
         );
         return copyData;
       });
-      setLeftData((prev) => [...prev, ...moveItem]);
+
+      setLeftData((prev) => {
+        return [...prev, ...moveItem];
+      });
     }
 
     setSelectId([]);
@@ -75,26 +94,12 @@ const Selectors = ({
         <Button onClick={onClickClear}>
           <i className="fa-solid fa-rotate"></i>
         </Button>
-        {singleMoving ? (
-          <>
-            <Button onClick={onClickRight}>
-              <i className="fa-solid fa-angles-right"></i>
-            </Button>
-            <Button onClick={onClickLeft}>
-              <i className="fa-solid fa-angles-left"></i>
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={onClickRight} disabled>
-              <i className="fa-solid fa-angles-right"></i>
-            </Button>
-            <Button onClick={onClickLeft} disabled>
-              <i className="fa-solid fa-angles-left"></i>
-            </Button>
-          </>
-        )}
-
+        <Button onClick={onClickRight}>
+          <i className="fa-solid fa-angles-right"></i>
+        </Button>
+        <Button onClick={onClickLeft}>
+          <i className="fa-solid fa-angles-left"></i>
+        </Button>
         <Button onClick={() => onMove(selectId, 1)}>
           <i className="fa-solid fa-angle-right"></i>
         </Button>
