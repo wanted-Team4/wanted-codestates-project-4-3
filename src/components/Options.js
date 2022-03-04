@@ -4,16 +4,17 @@ import Search from "./Search";
 import styled from "styled-components";
 import Items from "./Items";
 
-const Options = ({ dataOne, setDataOne }) => {
-  let dataOneNum = dataOne[1].length;
-  let dataTwoNum = dataOne[2].length;
-  const [leftData, setLeftData] = useState(dataOne[1]);
-  const [rightData, setRightData] = useState(dataOne[2]);
+const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
+  let dataOneNum = leftData.length;
+  let dataTwoNum = rightData.length;
 
   return (
     <>
       <OptionsBox>
-        <Search data={dataOne} setData={setDataOne} />
+        <Search
+          leftData={leftData}
+          setLeftData={setLeftData}
+        />
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>
@@ -24,7 +25,10 @@ const Options = ({ dataOne, setDataOne }) => {
       </OptionsBox>
 
       <OptionsBox>
-        <Search data={dataOne} setData={setDataOne} />
+        <Search
+          rightData={rightData}
+          setRightData={setRightData}
+        />
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>

@@ -7,13 +7,17 @@ import { useState } from "react";
 import { emojiMenus } from "../components/emojiMenus";
 
 const Home = () => {
-  const [dataOne, setDataOne] = useState({
-    1: [...emojiMenus.slice(0, 2)],
-    2: [...emojiMenus.slice(3, 4)],
-  });
+  const [leftData, setLeftData] = useState(emojiMenus);
+  const [rightData, setRightData] = useState([]);
+
   return (
     <MainContainer>
-      <Options dataOne={dataOne} setDataOne={setDataOne} />
+      <Options
+        leftData={leftData}
+        setLeftData={setLeftData}
+        rightData={rightData}
+        setRightData={setRightData}
+      />
       <Selectors />
       <Settings />
     </MainContainer>
