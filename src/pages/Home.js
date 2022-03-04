@@ -9,6 +9,7 @@ import { emojiMenus } from "../components/emojiMenus";
 const Home = () => {
   const [leftData, setLeftData] = useState(emojiMenus);
   const [rightData, setRightData] = useState([]);
+  const [selectId, setSelectId] = useState([]);
 
   return (
     <MainContainer>
@@ -17,8 +18,17 @@ const Home = () => {
         setLeftData={setLeftData}
         rightData={rightData}
         setRightData={setRightData}
+        selectId={selectId}
+        setSelectId={setSelectId}
       />
-      <Selectors />
+      <Selectors
+        leftData={leftData}
+        setLeftData={setLeftData}
+        rightData={rightData}
+        setRightData={setRightData}
+        selectId={selectId}
+        setSelectId={setSelectId}
+      />
       <Settings />
     </MainContainer>
   );

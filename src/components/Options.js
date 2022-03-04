@@ -4,37 +4,52 @@ import Search from "./Search";
 import styled from "styled-components";
 import Items from "./Items";
 
-const Options = ({ leftData, setLeftData, rightData, setRightData }) => {
+const Options = ({
+  leftData,
+  setLeftData,
+  rightData,
+  setRightData,
+  selectId,
+  setSelectId,
+}) => {
   let dataOneNum = leftData.length;
   let dataTwoNum = rightData.length;
 
   return (
     <>
       <OptionsBox>
-        <Search
-          leftData={leftData}
-          setLeftData={setLeftData}
-        />
+        <Search leftData={leftData} setLeftData={setLeftData} />
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>
-            <Items list={leftData} setList={setLeftData} />
+            <Items
+              list={leftData}
+              setList={setLeftData}
+              selectId={selectId}
+              setSelectId={setSelectId}
+            />
           </OptionsUl>
-          <OptionsCount>0 / {dataOneNum}</OptionsCount>
+          <OptionsCount>
+            {selectId.length} / {dataOneNum}
+          </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
 
       <OptionsBox>
-        <Search
-          rightData={rightData}
-          setRightData={setRightData}
-        />
+        <Search rightData={rightData} setRightData={setRightData} />
         <OptionsContainer>
           <OptionsSpan>available options</OptionsSpan>
           <OptionsUl>
-            <Items list={rightData} setList={setRightData} />
+            <Items
+              list={rightData}
+              setList={setRightData}
+              selectId={selectId}
+              setSelectId={setSelectId}
+            />
           </OptionsUl>
-          <OptionsCount>0 / {dataTwoNum}</OptionsCount>
+          <OptionsCount>
+            {selectId.length} / {dataTwoNum}
+          </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
     </>
