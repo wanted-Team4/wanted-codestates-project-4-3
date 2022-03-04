@@ -1,10 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import Search from "./Search";
 import styled from "styled-components";
 import Items from "./Items";
+import { useRecoilState } from "recoil";
+import {
+  rightTitleAtom,
+  leftTitleAtom,
+  fontSizeAtom,
+  boxWidthAtom,
+  boxHeightAtom,
+} from "../atom";
 
 const Options = ({ dataOne, setDataOne }) => {
+  //세팅 상태입니다
+  const [rightTitle] = useRecoilState(rightTitleAtom);
+  const [leftTitle] = useRecoilState(leftTitleAtom);
+  const [fontSize] = useRecoilState(fontSizeAtom);
+  const [boxWidth] = useRecoilState(boxWidthAtom);
+  const [boxHeight] = useRecoilState(boxHeightAtom);
+
   let dataOneNum = dataOne[1].length;
   let dataTwoNum = dataOne[2].length;
   const [leftData, setLeftData] = useState(dataOne[1]);
@@ -12,23 +26,27 @@ const Options = ({ dataOne, setDataOne }) => {
 
   return (
     <>
-      <OptionsBox>
+      <OptionsBox boxWidth={boxWidth} boxHeight={boxHeight}>
         <Search data={dataOne} setData={setDataOne} />
         <OptionsContainer>
-          <OptionsSpan>available options</OptionsSpan>
+          <OptionsSpan>{leftTitle}</OptionsSpan>
           <OptionsUl>
-            <Items list={leftData} setList={setLeftData} />
+            <Items list={leftData} setList={setLeftData} fontSize={fontSize} />
           </OptionsUl>
           <OptionsCount>0 / {dataOneNum}</OptionsCount>
         </OptionsContainer>
       </OptionsBox>
 
-      <OptionsBox>
+      <OptionsBox boxWidth={boxWidth} boxHeight={boxHeight}>
         <Search data={dataOne} setData={setDataOne} />
         <OptionsContainer>
-          <OptionsSpan>available options</OptionsSpan>
+          <OptionsSpan>{rightTitle}</OptionsSpan>
           <OptionsUl>
-            <Items list={rightData} setList={setRightData} />
+            <Items
+              list={rightData}
+              setList={setRightData}
+              fontSize={fontSize}
+            />
           </OptionsUl>
           <OptionsCount>0 / {dataTwoNum}</OptionsCount>
         </OptionsContainer>
@@ -38,8 +56,8 @@ const Options = ({ dataOne, setDataOne }) => {
 };
 const OptionsBox = styled.div`
   // 옵션 박스 감싸는 div
-  width: 250px;
-  height: 350px;
+  width: ${(props) => props.boxWidth}px;
+  height: ${(props) => props.boxHeight}px;
   display: flex;
   flex-direction: column;
   margin: 30px;
@@ -57,12 +75,8 @@ const OptionsContainer = styled.div`
 `;
 const OptionsSpan = styled.span`
   font-weight: 700;
-  height: 60px;
-  width: 100%;
-  padding-top: 15px;
-  border-bottom: 1px solid #ccc;
-  box-sizing: border-box;
-  text-align: center;
+  margin-left: 10px;
+  margin-top: 10px;
 `;
 const OptionsUl = styled.ul`
   display: flex;
@@ -70,9 +84,16 @@ const OptionsUl = styled.ul`
   overflow: auto;
   width: 100%;
   list-style: none;
+  border-bottom: 1px solid #ccc;
   padding: 0;
   height: 100%;
-  margin: 0;
+`;
+const Optionsli = styled.li`
+  cursor: pointer;
+  font-size: ${(props) => props.fontSize}px;
+  list-style: none;
+  border-top: 1px solid #ccc;
+  padding: 5px;
 `;
 const OptionsCount = styled.div`
   background-color: #fff;
@@ -82,8 +103,5 @@ const OptionsCount = styled.div`
   position: relative;
   text-align: center;
   width: 100%;
-  padding: 5px 0;
-  font-size: 12px;
-  font-weight: 500;
 `;
 export default Options;

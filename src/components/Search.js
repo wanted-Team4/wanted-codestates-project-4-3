@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-
-import Search from "./Search"
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { searchStateAtom } from "../atom";
 
 const Options = () => {
+  const [onDisabled] = useRecoilState(searchStateAtom);
 
   return (
     <>
+      {onDisabled ? (
+        <OptionsInp placeholder="검색" disabled></OptionsInp>
+      ) : (
         <OptionsInp placeholder="검색"></OptionsInp>
+      )}
     </>
   );
 };
@@ -22,6 +27,5 @@ const OptionsInp = styled.input`
   padding: 2px 10px;
   width: 100%;
 `;
-
 
 export default Options;
