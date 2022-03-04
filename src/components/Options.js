@@ -14,6 +14,7 @@ const Options = ({
 }) => {
   let dataOneNum = leftData.length;
   let dataTwoNum = rightData.length;
+  const [direction, setDirection] = useState();
 
   return (
     <>
@@ -27,10 +28,12 @@ const Options = ({
               setList={setLeftData}
               selectId={selectId}
               setSelectId={setSelectId}
+              direction="left"
+              setDirection={setDirection}
             />
           </OptionsUl>
           <OptionsCount>
-            {selectId.length} / {dataOneNum}
+            {direction === "left" ? selectId.length : 0} / {dataOneNum}
           </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
@@ -45,10 +48,12 @@ const Options = ({
               setList={setRightData}
               selectId={selectId}
               setSelectId={setSelectId}
+              direction="right"
+              setDirection={setDirection}
             />
           </OptionsUl>
           <OptionsCount>
-            {selectId.length} / {dataTwoNum}
+            {direction === "right" ? selectId.length : 0} / {dataTwoNum}
           </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
