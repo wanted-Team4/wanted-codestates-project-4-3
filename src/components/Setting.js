@@ -105,17 +105,20 @@ const Setting = () => {
             <Contents>
               <span>하나씩만 옮기기</span>
               <button
-                onClick={() =>
-                  setOnceMovingColor(!onceMovingColor) & setOnceMoving()
-                }
-                className={onceMovingColor ? "off" : "on"}
+              // onClick={() =>
+              //   setOnceMovingColor(!onceMovingColor) & setOnceMoving()
+              // }
+              // className={onceMovingColor ? "off" : "on"}
               ></button>
             </Contents>
 
             <Contents>
               <span>아이템 갯수 표시</span>
               <button
-                onClick={() => setSelectedNumColor(!selectedNumColor)}
+                onClick={() =>
+                  setSelectedNumColor(!selectedNumColor) &
+                  setSelectedNum(!selectedNum)
+                }
                 className={selectedNumColor ? "off" : "on"}
               ></button>
             </Contents>

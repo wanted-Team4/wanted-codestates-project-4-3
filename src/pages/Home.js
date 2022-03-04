@@ -30,7 +30,6 @@ const Home = () => {
         selectId={selectId}
         setSelectId={setSelectId}
       />
-      <Selectors />
       <Setting />
       {/* <Settings /> */}
     </MainContainer>

@@ -8,6 +8,8 @@ import {
   leftTitleAtom,
   boxWidthAtom,
   boxHeightAtom,
+  selectedNumAtom,
+  selectedNum,
 } from "../atom";
 
 const Options = ({
@@ -27,6 +29,7 @@ const Options = ({
   const [leftTitle] = useRecoilState(leftTitleAtom);
   const [boxWidth] = useRecoilState(boxWidthAtom);
   const [boxHeight] = useRecoilState(boxHeightAtom);
+  const [selectedNum] = useRecoilState(selectedNumAtom);
 
   return (
     <>
@@ -45,7 +48,11 @@ const Options = ({
             />
           </OptionsUl>
           <OptionsCount>
-            {direction === "left" ? selectId.length : 0} / {dataOneNum}
+            {selectedNum ? (
+              <>
+                {direction === "left" ? selectId.length : 0} / {dataOneNum}
+              </>
+            ) : null}
           </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
@@ -65,7 +72,11 @@ const Options = ({
             />
           </OptionsUl>
           <OptionsCount>
-            {direction === "right" ? selectId.length : 0} / {dataTwoNum}
+            {selectedNum ? (
+              <>
+                {direction === "right" ? selectId.length : 0} / {dataTwoNum}
+              </>
+            ) : null}
           </OptionsCount>
         </OptionsContainer>
       </OptionsBox>
