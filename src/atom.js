@@ -33,7 +33,7 @@ export const boxHeightAtom = atom({
 
 export const singleMovingAtom = atom({
   key: "singleMovingAtom",
-  default: null,
+  default: false,
 });
 
 export const selectedNumAtom = atom({
