@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
 import Options from "../components/Options";
 // import Settings from "../components/Settings";
 import Setting from "../components/Setting";
+import React from "react";
 import Selectors from "../components/Selectors";
-import { useState } from "react";
 import { emojiMenus } from "../components/emojiMenus";
+import styled from "styled-components";
+import { useState } from "react";
 
 const Home = () => {
   const [leftData, setLeftData] = useState(emojiMenus);
