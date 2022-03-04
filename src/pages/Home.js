@@ -1,7 +1,8 @@
 import Options from "../components/Options";
+// import Settings from "../components/Settings";
+import Setting from "../components/Setting";
 import React from "react";
 import Selectors from "../components/Selectors";
-import Settings from "../components/Settings";
 import { emojiMenus } from "../components/emojiMenus";
 import styled from "styled-components";
 import { useState } from "react";
@@ -29,7 +30,8 @@ const Home = () => {
         selectId={selectId}
         setSelectId={setSelectId}
       />
-      <Settings />
+      <Setting />
+      {/* <Settings /> */}
     </MainContainer>
   );
 };
@@ -39,6 +41,7 @@ const MainContainer = styled.main`
   position: relative;
   display: flex;
   justify-content: center;
+  padding: 25px;
 `;
 
 export default Home;
