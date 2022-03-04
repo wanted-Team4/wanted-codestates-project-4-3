@@ -114,7 +114,7 @@ const Label = styled.label`
   background-color: #ccc;
   display: block;
   height: 22px;
-  width: 44px
+  width: 44px;
   /* &.sc-gjNHFA gerxap input:checked + label {
     background-color: bisque;
   } */
